@@ -1,39 +1,38 @@
 <template>
-  <div class="elemental-page">
+  <div class="tabata-page">
     <div class="block">
       <div class="text-block">
-        <div class="title"><span>elementals</span></div>
+        <div class="title">
+          <span>tabata </span> <br />
+          <span>timer</span>
+        </div>
         <div class="text">
-          <span
-            >my latest pet project, which will become a “magic” shop and which
-            I'm currently working on.
-          </span>
-          <br />
-          <span>design by zgotlove</span>
+          <span>frontend app for mobile devices for practicing tabata </span>
         </div>
       </div>
-      <div class="logo-block"><img src="@/assets/navbar-elem.svg" /></div>
     </div>
     <div class="screen" @mouseover="hover = true" @mouseleave="hover = false">
       <div class="pre-screen" :class="{ active: hover }">
         <button
           class="button-5"
-          :class="{
-            active: hover || showButton,
-          }"
+          :class="{ active: hover || showButton }"
           role="button"
         >
-          Watch the site
+          Watch
         </button>
       </div>
-      <img src="@/assets/preelem.png" alt="" />
+      <div class="main-img"><img src="@/assets/PreTabata1.png" alt="" /></div>
+      <div class="other-img">
+        <img src="@/assets/PreTabata2.png" alt="" />
+        <img class="pre-tabata-mini-two" src="@/assets/PreTabata3.png" alt="" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ElementalPage",
+  name: "TabataPage",
   data() {
     return { hover: false };
   },

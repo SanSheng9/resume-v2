@@ -1,39 +1,32 @@
 <template>
-  <div class="elemental-page">
+  <div class="solar-page">
     <div class="block">
       <div class="text-block">
-        <div class="title"><span>elementals</span></div>
+        <div class="title"><span>solar </span> <br /><span>system</span></div>
         <div class="text">
-          <span
-            >my latest pet project, which will become a “magic” shop and which
-            I'm currently working on.
-          </span>
-          <br />
-          <span>design by zgotlove</span>
+          <span>my first pet project </span>
         </div>
       </div>
-      <div class="logo-block"><img src="@/assets/navbar-elem.svg" /></div>
+      <div class="logo-block"><img src="@/assets/navbar-sun.svg" /></div>
     </div>
     <div class="screen" @mouseover="hover = true" @mouseleave="hover = false">
       <div class="pre-screen" :class="{ active: hover }">
         <button
           class="button-5"
-          :class="{
-            active: hover || showButton,
-          }"
+          :class="{ active: hover || showButton }"
           role="button"
         >
-          Watch the site
+          Watch
         </button>
       </div>
-      <img src="@/assets/preelem.png" alt="" />
+      <img src="@/assets/preSolar.png" alt="" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ElementalPage",
+  name: "SolarPage",
   data() {
     return { hover: false };
   },

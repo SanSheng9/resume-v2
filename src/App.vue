@@ -1,5 +1,5 @@
 <template>
-  <div class="resume">
+  <div class="resume" @wheel.prevent="rollingMouse">
     <div class="wrapper">
       <InfoBar
         @close="closeBar"
@@ -10,67 +10,34 @@
         <ElementalPage
           :class="{ deactivate: deactivationBar }"
           class="elemental page"
-          :style="{ top: topPage + 'px' }"
+          :style="{ top: topPage + 'vh' }"
         />
-        <div
-          class="next page"
-          :style="{ top: topPage + 981 + 'px' }"
+        <SolarPage
+          :class="{ deactivate: deactivationBar }"
+          class="solar page"
+          :style="{ top: topPage + 100 + 'vh' }"
+        />
+        <TabataPage
+          class="tabata page"
+          :style="{ top: topPage + 100 * 2 + 'vh' }"
           :class="{ deactivate: deactivationBar }"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-          bibendum vehicula nunc non rutrum. Nam eu orci sed nisl interdum
-          venenatis. Aenean viverra nibh leo, congue bibendum leo pellentesque
-          id. Nam rhoncus, ipsum id tincidunt cursus, felis purus rutrum lorem,
-          ut iaculis nibh velit id mauris. In quam sem, luctus id faucibus sed,
-          porta at arcu. Maecenas posuere vestibulum dolor, ut sollicitudin orci
-          hendrerit eu. Suspendisse convallis sodales odio, quis varius risus
-          eleifend ut. Aenean eu libero lorem. Quisque tristique tortor non
-          suscipit lobortis. Duis a elit justo. Nam metus turpis, blandit eget
-          lacus in, dapibus suscipit justo. Donec vel diam magna. Praesent
-          pellentesque molestie faucibus. Nulla non faucibus nisl, porta mollis
-          nibh. Sed eu justo volutpat, molestie ipsum eu, aliquam dui. Sed sed
-          mollis metus. Nunc et libero eu sapien bibendum aliquam. Praesent ut
-          lacus eu felis scelerisque tempus. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Suspendisse sagittis quam ac consectetur
-          euismod. Donec placerat congue eros, vitae vulputate tortor pulvinar
-          et. Fusce ac tristique ipsum, sit amet convallis orci. Mauris semper
-          elementum tortor. Duis quis tempor urna, ut aliquam tortor. Phasellus
-          consectetur nisi id pharetra mattis. Suspendisse blandit laoreet ante,
-          et commodo nunc varius ac. Ut imperdiet efficitur erat, sed tristique
-          turpis viverra vitae. Nam volutpat neque sit amet ultrices
-          consectetur. Donec sit amet pulvinar velit. Mauris id efficitur
-          lectus. Donec rutrum mauris ac augue porttitor, nec maximus arcu
-          venenatis. Aenean a pharetra ipsum. Sed vehicula quam urna, non
-          pharetra diam sagittis vel. Pellentesque imperdiet, elit a venenatis
-          cursus, magna neque maximus ante, non varius eros eros vitae risus.
-          Quisque id pharetra arcu. Curabitur ultricies molestie pellentesque.
-          Pellentesque rhoncus lobortis nulla, non sagittis lectus malesuada
-          non. Maecenas auctor semper egestas. Suspendisse venenatis odio nec
-          metus commodo convallis. Pellentesque malesuada facilisis purus, ut
-          ornare elit scelerisque aliquam. Donec ut auctor velit, quis suscipit
-          odio. Nulla facilisis iaculis dui nec molestie. Phasellus tincidunt
-          molestie diam, vel viverra dolor dignissim imperdiet. Maecenas ac
-          sagittis neque, in scelerisque velit. Etiam imperdiet mollis dui, at
-          mollis arcu vestibulum ac. Fusce odio metus, eleifend eget commodo
-          egestas, tincidunt a sem. Ut ornare ipsum quis maximus viverra. Aenean
-          accumsan in lorem consequat blandit. Proin leo leo, vulputate in
-          eleifend non, fringilla id nibh. Donec sit amet dui sed velit dictum
-          viverra. Donec neque eros, volutpat pellentesque lacus a, tempor
-          dapibus dui. Suspendisse egestas mi vitae sapien dignissim congue.
-          Aenean scelerisque felis ac ultricies venenatis. Nulla suscipit sapien
-          at urna blandit euismod. Pellentesque habitant morbi tristique
-          senectus et netus et malesuada fames ac turpis egestas. Quisque
-          lacinia risus at mauris ultricies accumsan. In hendrerit elementum
-          urna, non congue ante varius a. Praesent sit amet mauris lorem. Nunc
-          ultricies, magna quis lobortis pulvinar, nibh risus vehicula tellus,
-          vel dictum est neque eget sem. Proin volutpat nunc eu ex aliquet, id
-          ultrices massa efficitur. Maecenas arcu lectus, tempor ut sagittis
-          vel, molestie sed risus. Ut tempus, lorem sed efficitur ultrices, erat
-          sem facilisis erat, id feugiat elit arcu non ante. Nunc nec ultrices
-          nisi, suscipit ullamcorper quam.
-        </div>
-        <Navbar class="navbar" @nav="changePage" />
+        </TabataPage>
+        <OtherPage
+          class="other page"
+          :style="{ top: topPage + 100 * 3 + 'vh' }"
+          :class="{ deactivate: deactivationBar }"
+        >
+        </OtherPage>
       </div>
+    </div>
+    <div class="flexbox-navbar">
+      <Navbar
+        class="navbar"
+        :class="{ deactivate: deactivationBar }"
+        @nav="changePage"
+        :position="currentPosition"
+      />
     </div>
   </div>
 </template>
@@ -79,10 +46,16 @@
 import InfoBar from "./components/InfoBar.vue";
 import Navbar from "@/components/NavBar.vue";
 import ElementalPage from "@/components/ElementalPage.vue";
+import SolarPage from "@/components/SolarPage";
+import TabataPage from "@/components/TabataPage";
+import OtherPage from "@/components/OtherPage";
 
 export default {
   name: "App",
   components: {
+    OtherPage,
+    TabataPage,
+    SolarPage,
     ElementalPage,
     Navbar,
     InfoBar,
@@ -91,6 +64,8 @@ export default {
     return {
       deactivationBar: false,
       topPage: 0,
+      mouseValue: 0,
+      currentPosition: 1,
     };
   },
   methods: {
@@ -101,8 +76,43 @@ export default {
     changePage(value) {
       if (value === 1) {
         this.topPage = 0;
+        this.currentPosition = value;
       } else if (value === 2) {
-        this.topPage = -981;
+        this.topPage = -100;
+        this.currentPosition = value;
+      } else if (value === 3) {
+        this.topPage = -100 * 2;
+        this.currentPosition = value;
+      } else if (value === 4) {
+        this.topPage = -100 * 3;
+        this.currentPosition = value;
+      }
+    },
+    rollingMouse(e) {
+      if (e.deltaY > 0) {
+        this.mouseValue = 1;
+        if (this.topPage === 0) {
+          this.topPage = -100;
+          this.currentPosition = 2;
+        } else if (this.topPage === -100) {
+          this.topPage = -(100 * 2);
+          this.currentPosition = 3;
+        } else if (this.topPage === -(100 * 2)) {
+          this.topPage = -100 * 3;
+          this.currentPosition = 4;
+        }
+      } else if (e.deltaY < 0) {
+        this.mouseValue = 2;
+        if (this.topPage === -100 * 3) {
+          this.topPage = -(100 * 2);
+          this.currentPosition = 3;
+        } else if (this.topPage === -(100 * 2)) {
+          this.topPage = -100;
+          this.currentPosition = 2;
+        } else if (this.topPage === -100) {
+          this.topPage = 0;
+          this.currentPosition = 1;
+        }
       }
     },
   },
@@ -110,7 +120,7 @@ export default {
 </script>
 
 <style>
-@import url("@/assets/standart.css");
+@import url("@/css/standart.css");
 @font-face {
   font-style: normal;
   font-weight: 400;
@@ -142,6 +152,11 @@ export default {
   position: relative;
   overflow: hidden;
 }
+@media (max-height: 982px) {
+  .wrapper {
+    height: 100vh;
+  }
+}
 .main {
   width: 1240px;
   position: relative;
@@ -153,38 +168,409 @@ export default {
   bottom: 0;
   width: 400px;
   transition: 0.3s ease;
+  z-index: 51 !important;
 }
 .infobar.deactivate {
   width: 70px;
 }
+.flexbox-navbar {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
 .navbar {
-  position: absolute;
-  right: 515px;
-  top: 710px;
-  transform: rotate(-100grad);
-}
-.elemental.page {
-  position: absolute;
-  left: 415px;
-  width: calc(100% - 415px);
+  z-index: 50;
+  margin-left: 400px;
   transition: 0.3s ease;
-  padding-top: 70px;
+  margin-bottom: 7px;
 }
-.next.page {
-  position: absolute;
-  top: 981px;
-  left: 415px;
-  width: calc(100% - 415px);
-  transition: 0.3s ease;
+.navbar.deactivate {
+  margin-left: 70px;
 }
-.next.page.deactivate {
-  left: 130px;
+.solar {
+  background-color: black;
+  left: 70px;
+  padding-bottom: 1px;
 }
-.elemental.page.deactivate {
-  left: 130px;
+.page.deactivate {
+  left: 70px;
 }
 .page {
-  max-width: 1170px;
-  height: 981px;
+  min-height: calc(100vh - (100vh - 981px));
+  padding-top: 50px;
+  left: 400px;
+  min-width: calc(100% - 70px);
+  transition: 0.3s ease;
+  padding-left: 25px;
+  padding-right: 25px;
+  position: absolute;
+}
+/*NAME_PAGE*/
+.elemental-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.solar-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tabata-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.elemental-page .block {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.solar-page .block {
+  display: flex;
+}
+.text-block {
+  height: 100%;
+  margin-right: 10px;
+  text-align: center;
+}
+.page .title {
+  font-size: 90px;
+  font-family: Jura, sans-serif;
+  text-align: center;
+}
+.solar-page .title {
+  color: #9e9e9e;
+}
+.text {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 300;
+}
+.elemental-page .text {
+  max-width: 85%;
+  margin: 0 auto;
+}
+.solar-page .text {
+  color: #9e9e9e;
+}
+.logo-block {
+  flex: 1 1 150px;
+  display: flex;
+  justify-content: center;
+}
+.solar-page .logo-block {
+  width: 272px;
+  height: 264px;
+  display: flex;
+  margin-top: 30px;
+  margin-left: 50px;
+}
+.screen {
+  max-width: 900px;
+  margin-top: 30px;
+  position: relative;
+}
+.tabata-page .screen {
+  display: flex;
+  justify-content: center;
+}
+.elemental-page .screen {
+  border: 1px solid #dddddd;
+}
+.solar-page .screen {
+  border: 1px solid #6e6e6e;
+}
+.screen img {
+  width: 100%;
+}
+.tabata-page .screen img {
+  max-width: 100%;
+  border: 1px solid #dddddd;
+}
+.tabata-page .main-img {
+  flex: 0 0 446px;
+  margin-right: 70px;
+}
+.tabata-page .other-img {
+  flex: 0 0 279px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pre-tabata-mini-two {
+  padding: 5px;
+}
+.pre-screen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  transition: 0.5s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.pre-screen.active {
+  background-color: rgba(171, 171, 171, 0.2);
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.button-5 {
+  display: none;
+  z-index: 50;
+}
+.button-5.active {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: teal;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-5.active:hover,
+.button-5.active:focus {
+  background-color: #019d9d;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5.active:hover {
+  transform: translateY(-1px);
+}
+
+.button-5.active:active {
+  background-color: #006969;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  transform: translateY(0);
+}
+/*OPTIMISE*/
+@media (max-width: 1025px) {
+  .page {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 0;
+    min-width: calc(100vw - 70px) !important;
+  }
+  .elemental-page {
+    justify-content: center !important;
+  }
+  .block {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  .block .title {
+    font-size: 76px;
+    text-align: center;
+  }
+  .block .text {
+    font-size: 24px;
+    line-height: 35px;
+    max-width: 650px;
+  }
+  .logo-block {
+    margin-left: 0 !important;
+    margin-top: 15px !important;
+    flex: 1 1 150px;
+    display: flex;
+    justify-content: center;
+  }
+  .logo-block img {
+    max-width: 200%;
+  }
+  .screen {
+    max-width: 100% !important;
+  }
+  .tabata-page .screen {
+    max-width: 90% !important;
+  }
+  .page.tabata-page {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .other-page .title {
+    font-size: 84px;
+    font-family: Jura, sans-serif;
+    margin-bottom: 63px;
+  }
+  .other-page .text {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 300;
+    max-width: 800px;
+    margin-bottom: 54px;
+  }
+}
+@media (max-width: 769px) {
+  .page {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0;
+  }
+  .elemental-page {
+    justify-content: center !important;
+  }
+  .block {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  .block .text-block {
+    margin-right: 0;
+  }
+  .block .title {
+    font-size: 52px;
+    text-align: center;
+    line-height: 40px;
+  }
+  .block .text {
+    font-size: 20px;
+    line-height: 35px;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  .logo-block {
+    margin-left: 0 !important;
+    margin-top: 15px !important;
+    flex: 1 1 125px;
+    display: flex;
+    justify-content: center;
+  }
+  .logo-block img {
+    max-width: 200%;
+  }
+  .screen {
+    max-width: 100% !important;
+  }
+  .tabata-page .screen img {
+    max-width: 70%;
+    border: 1px solid #dddddd;
+  }
+  .tabata-page .screen {
+    display: block;
+  }
+  .tabata-page .main-img {
+    max-width: 100%;
+    margin-right: 0;
+  }
+  .tabata-page .main-img img {
+    max-width: 100%;
+  }
+  .tabata-page .other-img {
+    display: none;
+  }
+  .other-page .wrapper {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .other-page .title {
+    font-size: 84px;
+    font-family: Jura, sans-serif;
+    margin-bottom: 63px;
+  }
+  .other-page .text {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 300;
+    max-width: 600px;
+    margin-bottom: 54px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 426px) {
+  .screen img {
+    display: none;
+  }
+  .elemental-page .screen,
+  .solar-page .screen {
+    border: none;
+  }
+  .logo-block {
+    display: block;
+    margin: 0;
+    margin-top: 10px;
+  }
+  .screen {
+    width: 100%;
+  }
+  .pre-screen {
+    position: static;
+  }
+  .pre-screen.active {
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  .other-page .wrapper {
+    margin-left: 15px;
+  }
+  .other-page .title {
+    font-size: 46px;
+    font-family: Jura, sans-serif;
+    margin-bottom: 63px;
+  }
+  .other-page .text {
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: 300;
+    max-width: 300px;
+    margin-bottom: 54px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 376px) {
+  .block .title {
+    font-size: 48px;
+  }
+  .other-page .title {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  .other-page .text {
+    font-size: 24px;
+    max-width: 200px;
+    margin-bottom: 30px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 321px) {
+  .block .title {
+    font-size: 38px;
+  }
+  .block .text {
+    font-size: 16px;
+  }
 }
 </style>

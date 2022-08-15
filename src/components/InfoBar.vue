@@ -72,7 +72,7 @@ export default {
 <style scoped>
 .info-bar {
   background-color: teal;
-  height: 982px;
+  height: 100%;
   max-width: 400px;
   overflow: hidden;
   color: #f5f5f5;
@@ -82,6 +82,11 @@ export default {
   z-index: 10;
   font-weight: 300;
   border-top-left-radius: 10px;
+}
+@media (max-width: 400px) {
+  .info-bar {
+    max-width: 100vw;
+  }
 }
 .info-wrapper {
   display: flex;
@@ -153,5 +158,20 @@ export default {
   right: 20px;
   top: 20px;
   cursor: pointer;
+}
+@media (max-height: 981px) {
+  .personal-block {
+    margin-top: 30px;
+    margin-bottom: 200px;
+  }
+  .info-bar {
+    border-top-left-radius: 0;
+  }
+}
+@media (max-height: 715px) {
+  .personal-block {
+    margin-top: 25px;
+    margin-bottom: 7vh;
+  }
 }
 </style>
