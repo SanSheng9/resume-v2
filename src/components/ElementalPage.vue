@@ -16,15 +16,17 @@
     </div>
     <div class="screen" @mouseover="hover = true" @mouseleave="hover = false">
       <div class="pre-screen" :class="{ active: hover }">
-        <button
-          class="button-5"
-          :class="{
-            active: hover || showButton,
-          }"
-          role="button"
+        <a href="https://elements-gamma.vercel.app/" target="_blank"
+          ><button
+            class="button-5"
+            :class="{
+              active: hover || showButton,
+            }"
+            role="button"
+          >
+            Watch the site
+          </button></a
         >
-          Watch the site
-        </button>
       </div>
       <img src="@/assets/preelem.png" alt="" />
     </div>

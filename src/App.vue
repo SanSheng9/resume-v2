@@ -208,6 +208,19 @@ export default {
   padding-right: 25px;
   position: absolute;
 }
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+a {
+  text-decoration: none;
+}
+a:visited,
+a:hover {
+  color: #f5f5f5;
+}
+a:active {
+  color: #d5d5d5;
+}
 /*NAME_PAGE*/
 .elemental-page {
   display: flex;
@@ -323,6 +336,9 @@ export default {
   -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.other-page .text a {
+  color: black;
 }
 .button-5 {
   display: none;

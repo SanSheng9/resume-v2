@@ -3,8 +3,7 @@
     <div class="block">
       <div class="text-block">
         <div class="title">
-          <span>tabata </span> <br />
-          <span>timer</span>
+          <span>tabata timer</span>
         </div>
         <div class="text">
           <span>frontend app for mobile devices for practicing tabata </span>
@@ -13,13 +12,15 @@
     </div>
     <div class="screen" @mouseover="hover = true" @mouseleave="hover = false">
       <div class="pre-screen" :class="{ active: hover }">
-        <button
-          class="button-5"
-          :class="{ active: hover || showButton }"
-          role="button"
+        <a href="https://resume-lake-rho.vercel.app/tabata" target="_blank"
+          ><button
+            class="button-5"
+            :class="{ active: hover || showButton }"
+            role="button"
+          >
+            Watch
+          </button></a
         >
-          Watch
-        </button>
       </div>
       <div class="main-img"><img src="@/assets/PreTabata1.png" alt="" /></div>
       <div class="other-img">

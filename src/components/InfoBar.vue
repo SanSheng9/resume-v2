@@ -6,7 +6,9 @@
           <div class="avatar">
             <img src="@/assets/avatar.svg" alt="" />
           </div>
-          <div class="username"><span>@sansheng9</span></div>
+          <div class="username">
+            <a href="https://t.me/SanSheng9" target="_blank">@sansheng9</a>
+          </div>
         </div>
         <div class="text-block">
           <div class="title"><span>Sergey Chistyakov</span></div>
@@ -23,24 +25,36 @@
       <div class="link-block">
         <div class="link">
           <div class="logo-link"><img src="@/assets/local.svg" /></div>
-          <div class="title-link">
+          <a
+            target="_blank"
+            href="https://goo.gl/maps/9rDLXFkuZGBxJsE68"
+            class="title-link"
+          >
             <div class="pre-title"><span>position</span></div>
             <div class="title"><span> Primorsky Krai, Vladivostok</span></div>
-          </div>
+          </a>
         </div>
         <div class="link">
           <div class="logo-link"><img src="@/assets/email.svg" alt="" /></div>
-          <div class="title-link">
+          <a
+            href="mailto: sansheng9@yandex.ru"
+            target="_blank"
+            class="title-link"
+          >
             <div class="pre-title"><span>e-mail</span></div>
             <div class="title"><span>sansheng9@yandex.ru </span></div>
-          </div>
+          </a>
         </div>
         <div class="link">
           <div class="logo-link"><img src="@/assets/github.svg" alt="" /></div>
-          <div class="title-link">
+          <a
+            href="https://github.com/SanSheng9"
+            target="_blank"
+            class="title-link"
+          >
             <div class="pre-title"><span>github</span></div>
             <div class="title"><span>github.com/SanSheng9</span></div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -114,7 +128,10 @@ export default {
 }
 .username {
   font-size: 14px;
-  color: #c8c8c8;
+  color: #c8c8c8 !important;
+}
+.username a {
+  color: #c8c8c8 !important;
 }
 .text-block {
   display: flex;
@@ -141,6 +158,9 @@ export default {
   margin-bottom: 15px;
   align-items: center;
   cursor: pointer;
+}
+.link a {
+  color: #f5f5f5;
 }
 .title-link {
   margin-left: 5px;
