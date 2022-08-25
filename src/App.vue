@@ -630,4 +630,9 @@ a:active {
     font-size: 16px;
   }
 }
+@media (orientation: portrait) {
+  .navbar {
+    display: none;
+  }
+}
 </style>
