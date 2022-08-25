@@ -1,5 +1,5 @@
 <template>
-  <div class="resume" @wheel.prevent="rollingMouse">
+  <div class="resume" @wheel="rollingMouse">
     <div class="wrapper">
       <InfoBar
         @close="closeBar"
