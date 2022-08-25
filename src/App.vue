@@ -1,8 +1,9 @@
 <template>
-  <div class="resume" @wheel="rollingMouse">
+  <div class="resume" @wheel.prevent="rollingMouse">
     <div class="wrapper">
       <InfoBar
         @close="closeBar"
+        :show="deactivationBar"
         :class="{ deactivate: deactivationBar }"
         class="infobar"
       />
@@ -34,7 +35,10 @@
     <div class="flexbox-navbar">
       <Navbar
         class="navbar"
-        :class="{ deactivate: deactivationBar }"
+        :class="{
+          deactivate: deactivationBar && moveNavbar,
+          dontmove: !moveNavbar,
+        }"
         @nav="changePage"
         :position="currentPosition"
       />
@@ -68,12 +72,17 @@ export default {
       currentPosition: 1,
     };
   },
+  computed: {
+    moveNavbar() {
+      return document.documentElement.scrollHeight < 983;
+    },
+  },
   methods: {
     closeBar() {
       this.deactivationBar = !this.deactivationBar;
-      console.log("deactivate");
     },
     changePage(value) {
+      this.deactivationBar = true;
       if (value === 1) {
         this.topPage = 0;
         this.currentPosition = value;
@@ -89,6 +98,7 @@ export default {
       }
     },
     rollingMouse(e) {
+      this.deactivationBar = true;
       if (e.deltaY > 0) {
         this.mouseValue = 1;
         if (this.topPage === 0) {
@@ -188,6 +198,9 @@ export default {
   margin-bottom: 7px;
 }
 .navbar.deactivate {
+  margin-left: 70px;
+}
+.navbar.dontmove {
   margin-left: 70px;
 }
 .solar {

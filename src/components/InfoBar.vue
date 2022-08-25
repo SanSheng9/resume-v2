@@ -1,6 +1,6 @@
 <template>
   <div class="info-bar">
-    <div class="info-wrapper" :class="{ deactivate: showBar }">
+    <div class="info-wrapper" :class="{ deactivate: show }">
       <div class="personal-block">
         <div class="telegram-block">
           <div class="avatar">
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="cross" @click="closeBar">
-      <img v-if="!showBar" src="@/assets/cross.svg" alt="" />
+      <img v-if="!show" src="@/assets/cross.svg" alt="" />
       <img v-else src="@/assets/burger.svg" alt="" />
     </div>
   </div>
@@ -69,15 +69,15 @@
 export default {
   name: "InfoBar",
   emits: ["close"],
-  data() {
-    return {
-      showBar: false,
-    };
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     closeBar() {
       this.$emit("close");
-      this.showBar = !this.showBar;
     },
   },
 };
