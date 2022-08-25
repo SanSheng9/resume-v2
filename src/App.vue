@@ -139,7 +139,7 @@ export default {
   background-color: #dddddd;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   font-family: Mulish, Bahnschrift, sans-serif;
 }
 .wrapper {
