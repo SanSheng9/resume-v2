@@ -180,7 +180,6 @@ html {
   border-top-right-radius: 10px;
   position: relative;
   overflow: hidden;
-  z-index: 3;
 }
 @media (max-height: 982px) {
   .wrapper {
@@ -200,7 +199,7 @@ html {
   bottom: 0;
   width: 400px;
   transition: 0.3s ease;
-  z-index: 51 !important;
+  z-index: 49 !important;
 }
 .infobar.deactivate {
   left: -330px;
@@ -208,15 +207,16 @@ html {
 .flexbox-navbar {
   position: absolute;
   min-width: 100%;
-  min-height: 100%;
+  max-height: 94px;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  z-index: 1;
+  z-index: 50;
 }
 .navbar {
   z-index: 50;
-  margin-left: 400px;
+  margin-left: 470px;
   transition: 0.3s ease;
   margin-bottom: 7px;
 }
@@ -235,7 +235,7 @@ html {
   left: 70px;
 }
 .page {
-  min-height: 100vh;
+  min-height: calc(100vh - (100vh - 981px));
   padding-top: 50px;
   left: 400px;
   min-width: calc(100% - 70px);
@@ -243,6 +243,11 @@ html {
   padding-left: 25px;
   padding-right: 25px;
   position: absolute;
+}
+@media (max-height: 982px) {
+  .page {
+    min-height: 100vh;
+  }
 }
 a:not([class]) {
   text-decoration-skip-ink: auto;
