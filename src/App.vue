@@ -2,12 +2,13 @@
   <div class="resume" @wheel.prevent="rollingMouse">
     <div class="wrapper">
       <InfoBar
+        v-touch:swipe="swipeInfobar"
         @close="closeBar"
         :show="deactivationBar"
         :class="{ deactivate: deactivationBar }"
         class="infobar"
       />
-      <div class="main">
+      <div class="main" v-touch:swipe="swipeScreen">
         <ElementalPage
           :class="{ deactivate: deactivationBar }"
           class="elemental page"
@@ -97,9 +98,24 @@ export default {
         this.currentPosition = value;
       }
     },
+    swipeScreen(s) {
+      console.log("swipe", s);
+      if (s === "top") {
+        this.rollingMouse(1);
+      } else if (s === "bottom") {
+        this.rollingMouse(0);
+      }
+    },
+    swipeInfobar(e) {
+      if (e === "right") {
+        this.deactivationBar = false;
+      } else if (e === "left") {
+        this.deactivationBar = true;
+      }
+    },
     rollingMouse(e) {
       this.deactivationBar = true;
-      if (e.deltaY > 0) {
+      if (e.deltaY > 0 || e === 1) {
         this.mouseValue = 1;
         if (this.topPage === 0) {
           this.topPage = -100;
@@ -111,7 +127,7 @@ export default {
           this.topPage = -100 * 3;
           this.currentPosition = 4;
         }
-      } else if (e.deltaY < 0) {
+      } else if (e.deltaY < 0 || e === 0) {
         this.mouseValue = 2;
         if (this.topPage === -100 * 3) {
           this.topPage = -(100 * 2);
@@ -131,6 +147,9 @@ export default {
 
 <style>
 @import url("@/css/standart.css");
+html {
+  overflow: hidden;
+}
 @font-face {
   font-style: normal;
   font-weight: 400;
@@ -161,10 +180,13 @@ export default {
   border-top-right-radius: 10px;
   position: relative;
   overflow: hidden;
+  z-index: 3;
 }
 @media (max-height: 982px) {
   .wrapper {
     height: 100vh;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
 }
 .main {
@@ -181,7 +203,7 @@ export default {
   z-index: 51 !important;
 }
 .infobar.deactivate {
-  width: 70px;
+  left: -330px;
 }
 .flexbox-navbar {
   position: absolute;
@@ -190,6 +212,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  z-index: 1;
 }
 .navbar {
   z-index: 50;
@@ -212,7 +235,7 @@ export default {
   left: 70px;
 }
 .page {
-  min-height: calc(100vh - (100vh - 981px));
+  min-height: 100vh;
   padding-top: 50px;
   left: 400px;
   min-width: calc(100% - 70px);
@@ -299,7 +322,7 @@ a:active {
 }
 .screen {
   max-width: 900px;
-  margin-top: 30px;
+  margin-top: 10px;
   position: relative;
 }
 .tabata-page .screen {
@@ -416,7 +439,7 @@ a:active {
   .block {
     flex-direction: column-reverse;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
   .block .title {
     font-size: 76px;
@@ -472,7 +495,7 @@ a:active {
   .block {
     flex-direction: column-reverse;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
   }
   .block .text-block {
     margin-right: 0;

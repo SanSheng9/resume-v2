@@ -14,11 +14,11 @@
           <div class="title"><span>Sergey Chistyakov</span></div>
           <div class="post-title"><span>frontend-developer</span></div>
           <div class="text">
-            <span
-              >My name is Sergey Chistyakov. I’m 23 years old. I’m developing
+            <p>
+              My name is Sergey Chistyakov. I’m 23 years old. I’m developing
               Frontend on Vue.js . At the moment, I’m improving my knowledge by
-              creating pet-projects.</span
-            >
+              creating pet-projects.
+            </p>
           </div>
         </div>
       </div>
@@ -107,6 +107,7 @@ export default {
   flex-direction: column;
   align-items: center;
   height: 100%;
+  transition: display 0.5s ease;
 }
 .info-wrapper.deactivate {
   display: none;
