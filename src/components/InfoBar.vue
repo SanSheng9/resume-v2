@@ -183,7 +183,7 @@ export default {
 @media (max-height: 981px) {
   .personal-block {
     margin-top: 30px;
-    margin-bottom: 200px;
+    margin-bottom: 20vh;
   }
   .info-bar {
     border-top-left-radius: 0;

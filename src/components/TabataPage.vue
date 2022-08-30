@@ -3,7 +3,7 @@
     <div class="block">
       <div class="text-block">
         <div class="title">
-          <span>tabata timer</span>
+          <span>tabata-timer</span>
         </div>
         <div class="text">
           <span>frontend app for mobile devices for practicing tabata </span>

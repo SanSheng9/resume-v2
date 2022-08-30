@@ -147,6 +147,9 @@ export default {
 
 <style>
 @import url("@/css/standart.css");
+:root {
+  --index: calc(1vw + 1vh);
+}
 html {
   overflow: hidden;
 }
@@ -294,7 +297,7 @@ a:active {
   text-align: center;
 }
 .page .title {
-  font-size: 90px;
+  font-size: calc(var(--index) * 3);
   font-family: Jura, sans-serif;
   text-align: center;
 }
@@ -302,7 +305,7 @@ a:active {
   color: #9e9e9e;
 }
 .text {
-  font-size: 32px;
+  font-size: calc(var(--index) * 1.3);
   line-height: 40px;
   font-weight: 300;
 }
@@ -381,6 +384,12 @@ a:active {
 .other-page .text a {
   color: black;
 }
+.other-page .title {
+  margin-bottom: calc(var(--index));
+}
+.other-page .text {
+  margin-bottom: calc(var(--index));
+}
 .button-5 {
   display: none;
   z-index: 50;
@@ -446,14 +455,17 @@ a:active {
     align-items: center;
     margin-bottom: 30px;
   }
-  .block .title {
-    font-size: 76px;
-    text-align: center;
-  }
-  .block .text {
-    font-size: 24px;
-    line-height: 35px;
-    max-width: 650px;
+  /*.block .title {*/
+  /*  font-size: 76px;*/
+  /*  text-align: center;*/
+  /*}*/
+  /*.block .text {*/
+  /*  font-size: 24px;*/
+  /*  line-height: 35px;*/
+  /*  max-width: 650px;*/
+  /*}*/
+  .block .text-block {
+    width: min-content;
   }
   .logo-block {
     margin-left: 0 !important;
@@ -467,6 +479,7 @@ a:active {
   }
   .screen {
     max-width: 100% !important;
+    margin-top: 10px;
   }
   .tabata-page .screen {
     max-width: 90% !important;
@@ -476,16 +489,17 @@ a:active {
     padding-right: 0 !important;
   }
   .other-page .title {
-    font-size: 84px;
+    font-size: calc(var(--index) * 3);
     font-family: Jura, sans-serif;
     margin-bottom: 63px;
   }
   .other-page .text {
-    font-size: 32px;
+    font-size: calc(var(--index) * 1.2);
     line-height: 40px;
     font-weight: 300;
-    max-width: 800px;
+    /*max-width: 30vw;*/
     margin-bottom: 54px;
+    max-width: 70vw;
   }
 }
 @media (max-width: 769px) {
@@ -505,17 +519,17 @@ a:active {
   .block .text-block {
     margin-right: 0;
   }
-  .block .title {
-    font-size: 52px;
-    text-align: center;
-    line-height: 40px;
-  }
-  .block .text {
-    font-size: 20px;
-    line-height: 35px;
-    max-width: 200px;
-    margin: 0 auto;
-  }
+  /*.block .title {*/
+  /*  font-size: 52px;*/
+  /*  text-align: center;*/
+  /*  line-height: 40px;*/
+  /*}*/
+  /*.block .text {*/
+  /*  font-size: 20px;*/
+  /*  line-height: 35px;*/
+  /*  max-width: 200px;*/
+  /*  margin: 0 auto;*/
+  /*}*/
   .logo-block {
     margin-left: 0 !important;
     margin-top: 15px !important;
@@ -553,19 +567,19 @@ a:active {
     align-items: center;
     justify-content: center;
   }
-  .other-page .title {
-    font-size: 84px;
-    font-family: Jura, sans-serif;
-    margin-bottom: 63px;
-  }
-  .other-page .text {
-    font-size: 32px;
-    line-height: 40px;
-    font-weight: 300;
-    max-width: 600px;
-    margin-bottom: 54px;
-    margin: 0 auto;
-  }
+  /*.other-page .title {*/
+  /*  font-size: 84px;*/
+  /*  font-family: Jura, sans-serif;*/
+  /*  margin-bottom: 63px;*/
+  /*}*/
+  /*.other-page .text {*/
+  /*  font-size: 32px;*/
+  /*  line-height: 40px;*/
+  /*  font-weight: 300;*/
+  /*  max-width: 600px;*/
+  /*  margin-bottom: 54px;*/
+  /*  margin: 0 auto;*/
+  /*}*/
 }
 @media (max-width: 426px) {
   .screen img {
@@ -593,42 +607,42 @@ a:active {
   .other-page .wrapper {
     margin-left: 15px;
   }
-  .other-page .title {
-    font-size: 46px;
-    font-family: Jura, sans-serif;
-    margin-bottom: 63px;
-  }
-  .other-page .text {
-    font-size: 28px;
-    line-height: 40px;
-    font-weight: 300;
-    max-width: 300px;
-    margin-bottom: 54px;
-    margin: 0 auto;
-  }
+  /*.other-page .title {*/
+  /*  font-size: 46px;*/
+  /*  font-family: Jura, sans-serif;*/
+  /*  margin-bottom: 63px;*/
+  /*}*/
+  /*.other-page .text {*/
+  /*  font-size: 28px;*/
+  /*  line-height: 40px;*/
+  /*  font-weight: 300;*/
+  /*  max-width: 300px;*/
+  /*  margin-bottom: 54px;*/
+  /*  margin: 0 auto;*/
+  /*}*/
 }
 @media (max-width: 376px) {
-  .block .title {
-    font-size: 48px;
-  }
-  .other-page .title {
-    font-size: 32px;
-    margin-bottom: 30px;
-  }
-  .other-page .text {
-    font-size: 24px;
-    max-width: 200px;
-    margin-bottom: 30px;
-    margin: 0 auto;
-  }
+  /*.block .title {*/
+  /*  font-size: 48px;*/
+  /*}*/
+  /*.other-page .title {*/
+  /*  font-size: 32px;*/
+  /*  margin-bottom: 30px;*/
+  /*}*/
+  /*.other-page .text {*/
+  /*  font-size: 24px;*/
+  /*  max-width: 200px;*/
+  /*  margin-bottom: 30px;*/
+  /*  margin: 0 auto;*/
+  /*}*/
 }
 @media (max-width: 321px) {
-  .block .title {
-    font-size: 38px;
-  }
-  .block .text {
-    font-size: 16px;
-  }
+  /*.block .title {*/
+  /*  font-size: 38px;*/
+  /*}*/
+  /*.block .text {*/
+  /*  font-size: 16px;*/
+  /*}*/
 }
 @media (orientation: portrait) {
   .navbar {

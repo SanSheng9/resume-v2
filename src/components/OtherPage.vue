@@ -1,7 +1,7 @@
 <template>
   <div class="other-page">
     <div class="wrapper" :style="{ zIndex: 50 }">
-      <div class="title">other projects</div>
+      <div class="title">other-projects</div>
       <div class="text">
         <a href="https://github.com/SanSheng9/blog-test" target="_blank"
           ><b>blog-test</b></a

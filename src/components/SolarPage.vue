@@ -2,7 +2,7 @@
   <div class="solar-page">
     <div class="block">
       <div class="text-block">
-        <div class="title"><span>solar-system</span></div>
+        <div class="title"><span>solar_system</span></div>
         <div class="text">
           <span>my first pet project </span>
         </div>
